@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>belletmen</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-size: 14px; }
+    main { max-width: 560px; margin: 0 auto; padding: 56px 16px 64px; }
+    header { margin-bottom: 28px; }
+    header .sub { font-size: 14px; margin-top: 4px; }
+    .step { margin-top: 22px; }
+    .step-head { display: flex; align-items: center; gap: 10px; margin: 0 4px 8px; }
+    .step-head h2 { font-size: 15px; font-weight: 600; margin: 0; }
+    .num {
+      width: 22px; height: 22px; border-radius: 50%; flex: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--surface-2); color: var(--text-2); font-size: 12px; font-weight: 600;
+    }
+    .step.done .num { background: var(--text); color: var(--bg); }
+    .step.locked { opacity: .4; pointer-events: none; }
+    .card p { margin: 0 0 12px; color: var(--text-2); }
+    .card p:last-child { margin-bottom: 0; }
+    .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .row .label { flex: 1; min-width: 0; }
+    .row .label .sub { margin-top: 2px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .link-form { display: flex; gap: 8px; margin-top: 10px; }
+    .link-form .field { flex: 1; }
+    #result { margin-top: 18px; }
+    .settings-group .item { justify-content: space-between; }
+    .settings-group .item .label { flex: 1; min-width: 0; padding-right: 12px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; color: var(--text); word-break: break-all; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="wordmark large">belletmen</div>
+      <div class="sub">Google Meet için yoklama. Kurulum üç adım.</div>
+    </header>
+
+    <div id="no-client" class="notice" hidden>
+      <span class="dot red"></span>
+      <div class="body">
+        Google istemci kimliği tanımlı değil. <code>extension/config.js</code> dosyasını doldur.
+        <div class="sub" style="margin-top:6px">Yönlendirme adresi: <code id="redirect"></code></div>
+      </div>
+    </div>
+
+    <section class="step" id="step1">
+      <div class="step-head"><span class="num">1</span><h2>Google hesabı</h2></div>
+      <div class="card">
+        <div id="acc-none">
+          <p>Yoklamalar bu hesabın Drive'ına yazılır. belletmen yalnızca kendi oluşturduğu tabloyu görebilir.</p>
+          <button id="connect" class="btn">Google ile bağlan</button>
+        </div>
+        <div id="acc-some" class="row" hidden>
+          <div class="label"><div id="email" class="ellipsis"></div><div class="sub">Bağlı</div></div>
+          <button id="switch" class="btn secondary">Değiştir</button>
+          <button id="disconnect" class="btn text">Bağlantıyı kes</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step2">
+      <div class="step-head"><span class="num">2</span><h2>Yoklama tablosu</h2></div>
+      <div class="card">
+        <div id="sheet-none">
+          <p>Drive'ında yeni bir tablo oluşturulur.</p>
+          <button id="create" class="btn">Tablo oluştur</button>
+          <details class="disclosure">
+            <summary>Tablo zaten var</summary>
+            <p style="margin-top:6px">Aynı hesapla başka bir bilgisayarda oluşturduysan adresini yapıştır.</p>
+            <div class="link-form">
+              <input id="link-url" class="field" type="url" placeholder="docs.google.com/spreadsheets/d/…" spellcheck="false">
+              <button id="link" class="btn secondary">Bağla</button>
+            </div>
+          </details>
+        </div>
+        <div id="sheet-some" class="row" hidden>
+          <div class="label"><div id="sheet-title" class="ellipsis"></div><div class="sub">Google Sheets</div></div>
+          <button id="open-sheet" class="btn secondary">Aç</button>
+          <button id="unlink" class="btn text">Değiştir</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step3">
+      <div class="step-head"><span class="num">3</span><h2>Takım listesi</h2></div>
+      <div class="card">
+        <p>Tablodaki Üyeler sayfasına her üyenin ad soyadını ve alt takımını yaz. Sonrasında toplantıda yoklamayı başlatman yeterli.</p>
+        <button id="open-members" class="btn secondary">Tabloyu aç</button>
+      </div>
+    </section>
+
+    <div id="result" class="notice" hidden><span class="dot" id="result-dot"></span><div class="body" id="result-text"></div></div>
+
+    <section class="step">
+      <div class="step-head"><h2>Hata ayıklama</h2></div>
+      <div class="group settings-group">
+        <label class="item">
+          <span class="label">Hata ayıklama modu<span class="sub" style="display:block">Okunan katılımcıları konsola yazar ve teşhis düğmesini gösterir.</span></span>
+          <input id="debug" type="checkbox" class="switch">
+        </label>
+        <label class="item">
+          <span class="label">İsimleri gizle<span class="sub" style="display:block">Konsol ve teşhis çıktısında isimler kısaltılır.</span></span>
+          <input id="mask" type="checkbox" class="switch">
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>

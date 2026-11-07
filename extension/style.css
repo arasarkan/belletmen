@@ -1,0 +1,156 @@
+/*
+ * belletmen arayüzü. Koyu tema, sistem yazı tipi, monokrom.
+ * Gri tonlar Apple'ın koyu mod sistem grilerinden alındı. Renk yalnızca
+ * hata ve geri alınamaz işlemler için (kırmızı) kullanılır.
+ */
+:root {
+  color-scheme: dark;
+  --bg: #1c1c1e;
+  --surface: #2c2c2e;
+  --surface-2: #3a3a3c;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --text-3: #6e6e73;
+  --accent: #f5f5f7;
+  --accent-fg: #1c1c1e;
+  --accent-text: #f5f5f7;
+  --green: #f5f5f7;
+  --orange: #c7c7cc;
+  --red: #ff453a;
+  --red-text: #ff6961;
+  --red-soft: rgba(255, 69, 58, 0.16);
+  --radius: 12px;
+  --radius-s: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input { font: inherit; color: inherit; }
+a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { text-decoration: underline; }
+[hidden] { display: none !important; }
+
+/* Marka */
+.wordmark { font-weight: 600; letter-spacing: -0.01em; font-size: 15px; }
+.wordmark.large { font-size: 28px; letter-spacing: -0.02em; }
+
+/* Metin */
+.sub { color: var(--text-2); font-size: 12px; }
+.foot { color: var(--text-3); font-size: 12px; margin: 6px 4px 0; }
+.empty { color: var(--text-2); text-align: center; padding: 18px 8px; margin: 0; }
+.section-title { font-size: 12px; font-weight: 500; color: var(--text-2); margin: 0; padding: 0 4px; }
+.section-head { display: flex; align-items: center; justify-content: space-between; margin: 18px 0 6px; }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.spacer { flex: 1; }
+.num-tab { font-variant-numeric: tabular-nums; }
+
+/* Kart ve gruplanmış liste */
+.card, .group {
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+.card { padding: 14px; }
+.group { list-style: none; margin: 0; padding: 0; overflow: hidden; }
+.group > li, .group > .item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; min-height: 40px; position: relative;
+}
+.group > li + li::before, .group > .item + .item::before {
+  content: ""; position: absolute; top: 0; left: 14px; right: 0; height: 1px; background: var(--line);
+}
+
+/* Düğmeler */
+.btn {
+  border: 0; border-radius: var(--radius-s);
+  padding: 7px 14px; cursor: pointer;
+  background: var(--accent); color: var(--accent-fg); font-weight: 500;
+  transition: filter .15s, background .15s;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:active { filter: brightness(0.92); }
+.btn:disabled { opacity: .45; cursor: default; filter: none; }
+.btn.block { display: block; width: 100%; padding: 9px 14px; font-size: 14px; }
+.btn.secondary { background: var(--surface-2); color: var(--text); }
+.btn.destructive { background: var(--surface-2); color: var(--text); }
+.btn.destructive.confirm { background: var(--red); color: #fff; }
+.btn.text { background: none; color: var(--text-2); padding: 4px 6px; font-weight: 400; }
+.btn.text:hover { filter: none; color: var(--text); }
+.btn.small { font-size: 12px; }
+
+.toolbar { display: flex; gap: 6px; }
+.toolbar .btn { flex: 1; background: var(--surface); color: var(--text); font-weight: 400; padding: 8px 6px; font-size: 12px; }
+.toolbar .btn:hover { background: var(--surface-2); filter: none; }
+
+/* Alanlar */
+.field {
+  width: 100%; border: 0; border-radius: var(--radius-s);
+  background: var(--surface-2); color: var(--text);
+  padding: 8px 10px; outline: none;
+}
+.field::placeholder { color: var(--text-3); }
+.field:focus { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35); }
+
+/* Bildirim satırı */
+.notice {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: var(--surface); border-radius: var(--radius);
+  padding: 10px 12px; margin-bottom: 8px; color: var(--text);
+}
+.notice .dot { margin-top: 5px; }
+.notice .body { flex: 1; min-width: 0; }
+.notice .body .btn { margin-top: 8px; }
+
+/* Durum noktası */
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-3); flex: none; }
+.dot.green { background: var(--green); }
+.dot.orange { background: var(--orange); }
+.dot.red { background: var(--red); }
+.dot.accent { background: var(--text-2); }
+
+/* Durum metni */
+.st { font-size: 12px; white-space: nowrap; color: var(--text-2); }
+.st.green { color: var(--text-2); }
+.st.orange { color: var(--orange); }
+.st.red { color: var(--red-text); }
+.st.accent { color: var(--text); }
+
+/* Açılır bölüm */
+details.disclosure { margin-top: 10px; }
+details.disclosure > summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px;
+  padding: 6px 4px; color: var(--text-2); font-size: 12px; user-select: none;
+}
+details.disclosure > summary::-webkit-details-marker { display: none; }
+details.disclosure > summary::before {
+  content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg); transition: transform .15s; margin-right: 2px;
+}
+details.disclosure[open] > summary::before { transform: rotate(45deg); }
+
+/* Anahtar (toggle) */
+input.switch {
+  appearance: none; -webkit-appearance: none; flex: none;
+  width: 38px; height: 22px; border-radius: 11px; margin: 0;
+  background: var(--surface-2); position: relative; cursor: pointer; transition: background .2s;
+}
+input.switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; transition: transform .2s; box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+input.switch:checked { background: var(--text); }
+input.switch:checked::after { transform: translateX(16px); background: var(--bg); }
+input.switch:focus-visible { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35); outline: none; }
+
+/* Kaydırma çubuğu */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }

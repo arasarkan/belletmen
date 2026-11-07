@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "belletmen",
+  "short_name": "belletmen",
+  "version": "2.0.0",
+  "description": "Google Meet toplantıları için otomatik yoklama. Katılımı kendi Google Sheets tablonuza yazar.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3y9zAIWQjq5JFT2WVNx06Z/4aRnF4AAEiLJZnllpjStcjvbjxZ/7UTOvcLHcCPUXOt93LWUXtfccE4vqXXUgd0Prq6ZtcZFB9aPTzkfFihCVfXYLlSNAUN8iGAHMvV3/xVEQVXOK4n8IBP9l5KJkDnLPsva/+2fKzr1K4l8xBtMi0vBu9XbnyOOUX3Azo2xjn6L6kZtPHwb37BJnhVhIYjFODHUxKDm29TOhRATj0yqWNnw5mUN372eKx68jUN3inbD3wcxKQQijb75sNndmbidNABUyGSV6TfnJ/8vVHm3skOffLNJgmuoMeLopWz6+OisOTYc2mMbmT6+SEIDmpwIDAQAB",
+  "permissions": [
+    "storage",
+    "alarms",
+    "identity"
+  ],
+  "host_permissions": [
+    "https://meet.google.com/*",
+    "https://sheets.googleapis.com/*",
+    "https://openidconnect.googleapis.com/*",
+    "https://oauth2.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://meet.google.com/*"
+      ],
+      "js": [
+        "lib/core.js",
+        "selectors.js",
+        "tracker.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "belletmen",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

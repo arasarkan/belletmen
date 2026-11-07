@@ -1,0 +1,14 @@
+{
+  "name": "belletmen",
+  "version": "2.0.0",
+  "description": "Google Meet için sunucusuz yoklama: Chrome eklentisi + Google Sheets",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/run.js",
+    "icons": "node tools/make-icons.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

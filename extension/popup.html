@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>belletmen</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { width: 340px; padding: 14px 14px 10px; }
+    .bar { display: flex; align-items: center; gap: 8px; }
+    header.bar { margin-bottom: 12px; }
+    .state { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--text-2); font-size: 12px; }
+    .tracking { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 14px; }
+    .count { font-size: 44px; font-weight: 600; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+    .tracking .right { margin-left: auto; text-align: right; min-width: 0; max-width: 190px; }
+    .tracking .title { font-weight: 500; }
+    #idle-view .btn { margin-top: 10px; }
+    #live { max-height: 200px; overflow-y: auto; }
+    #live li { min-height: 34px; padding: 7px 14px; }
+    #sessions li { align-items: flex-start; }
+    #sessions .meta { flex: 1; min-width: 0; }
+    #sessions .err { color: var(--red-text); font-size: 12px; margin-top: 2px; }
+    #sessions .side { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    footer.bar { margin-top: 14px; color: var(--text-3); font-size: 12px; }
+    footer .btn.text { color: var(--text-2); padding: 4px 0; margin-right: 12px; }
+    footer .btn.text:hover { color: var(--text); }
+    .actions .item { width: 100%; border: 0; background: none; text-align: left; color: var(--text); cursor: pointer; min-height: 38px; padding: 9px 14px; }
+    .actions .item:hover { background: rgba(255,255,255,0.04); }
+    .actions .item:disabled { color: var(--text-3); cursor: default; }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <span class="wordmark">belletmen</span>
+    <span class="state" id="state" hidden><span class="dot" id="state-dot"></span><span id="state-text"></span></span>
+  </header>
+
+  <div id="notices"></div>
+
+  <section id="meet" class="card" hidden>
+    <div id="idle-view" hidden>
+      <input id="title" class="field" type="text" maxlength="120" placeholder="Toplantı adı" aria-label="Toplantı adı">
+      <button id="start" class="btn block">Yoklamayı başlat</button>
+    </div>
+    <div id="tracking-view" hidden>
+      <div class="tracking">
+        <div>
+          <div class="count" id="count">0</div>
+          <div class="sub">kişi toplantıda</div>
+        </div>
+        <div class="right">
+          <div class="title ellipsis" id="tracking-title"></div>
+          <div class="sub num-tab" id="elapsed"></div>
+        </div>
+      </div>
+      <button id="stop" class="btn block destructive">Bitir ve gönder</button>
+    </div>
+  </section>
+
+  <p id="not-meet" class="card sub" hidden></p>
+
+  <details id="live-details" class="disclosure" hidden>
+    <summary><span>Katılımcılar</span><span id="live-count" class="num-tab"></span></summary>
+    <ul id="live" class="group"></ul>
+  </details>
+
+  <section id="sheet-tools" hidden>
+    <div class="section-head"><h2 class="section-title">Tablo</h2></div>
+    <div class="group actions">
+      <button id="open-sheet" class="item">Tabloyu aç</button>
+      <button id="apply-review" class="item">İncelemeyi uygula</button>
+      <button id="refresh-summary" class="item">Özeti yenile</button>
+    </div>
+    <p id="sheet-msg" class="foot" hidden></p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Son yoklamalar</h2>
+      <button id="retry" class="btn text small" hidden>Şimdi gönder</button>
+    </div>
+    <ul id="sessions" class="group"></ul>
+    <p id="no-sessions" class="card sub" hidden>Henüz yoklama yok.</p>
+  </section>
+
+  <footer class="bar">
+    <button class="btn text" data-open-options>Ayarlar</button>
+    <button class="btn text" id="diag" hidden>Teşhis kopyala</button>
+    <span class="spacer"></span>
+    <span id="version" class="num-tab"></span>
+  </footer>
+
+  <script src="lib/core.js"></script>
+  <script src="tracker.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
