@@ -2,7 +2,7 @@
 
 Google Meet toplantılarında yoklama alan bir Chrome eklentisi. Toplantıdakileri izler, bitince yoklamayı Google Drive'ınızdaki bir tabloya yazar. Sunucu gerektirmez, ücretsizdir.
 
-Bir FRC takımı olarak online toplantılarda yoklamayı elle alıyorduk. Bunu kolaylaştırmak için Claude ile yazdık. Hata görürseniz bir [issue](#hata-bildirimi) açarak bize bildirebilirsiniz.
+Bir FRC takımı olarak online toplantılarda yoklamayı elle alıyorduk. Bunu kolaylaştırmak için Claude ile yazdık. Hata görürseniz bir [issue](https://github.com/arasarkan/belletmen/issues) açarak bize bildirebilirsiniz.
 
 ## Kurulum
 
@@ -43,7 +43,7 @@ Eklenti yalnızca Meet'te görünen adları ve giriş-çıkış saatlerini kayde
 
 ## Hata bildirimi
 
-GitHub'daki **Issues** sekmesinden yeni bir issue açın. Ne olduğunu ve varsa hata mesajını yazın.
+[Issues](https://github.com/arasarkan/belletmen/issues) sayfasından yeni bir issue açın. Ne olduğunu ve varsa hata mesajını yazın.
 
 Sorun katılımcıların okunmasıyla ilgiliyse, kurulum sayfasında **Hata ayıklama modu**'nu açın. Sonra toplantıda eklentiden **Teşhis kopyala**'ya basıp çıktıyı issue'ya ekleyin. Bu çıktıda isimler gizlenir.
 

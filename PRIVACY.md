@@ -32,7 +32,7 @@ belletmen, Google Meet toplantılarında yoklama almaya yarayan açık kaynaklı
 - Eklentiyi kaldırmak tarayıcıdaki tüm veriyi siler.
 - Tablo kullanıcının Drive'ındadır ve kullanıcı istediği zaman silebilir.
 
-**İletişim:** Sorularınız için projenin GitHub sayfasında bir issue açabilirsiniz.
+**İletişim:** Sorularınız için projenin [GitHub sayfasında](https://github.com/arasarkan/belletmen/issues) bir issue açabilirsiniz.
 
 ## English
 
@@ -64,4 +64,4 @@ belletmen is an open-source Chrome extension for taking attendance in Google Mee
 - Uninstalling the extension deletes all data stored in the browser.
 - The spreadsheet lives in the user's Drive, and the user can delete it at any time.
 
-**Contact:** Open an issue on the project's GitHub page.
+**Contact:** Open an issue on the project's [GitHub page](https://github.com/arasarkan/belletmen/issues).
